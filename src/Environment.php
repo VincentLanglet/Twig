@@ -22,13 +22,11 @@ use Twig\Error\SyntaxError;
 use Twig\Extension\CoreExtension;
 use Twig\Extension\EscaperExtension;
 use Twig\Extension\ExtensionInterface;
-use Twig\Extension\OptimizerExtension;
 use Twig\Extension\YieldNotReadyExtension;
 use Twig\Loader\ArrayLoader;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\LoaderInterface;
-use Twig\Node\Expression\Binary\AbstractBinary;
-use Twig\Node\Expression\Unary\AbstractUnary;
+use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\ModuleNode;
 use Twig\Node\Node;
 use Twig\NodeVisitor\NodeVisitorInterface;
@@ -51,27 +49,45 @@ class Environment
     public const RELEASE_VERSION = 1;
     public const EXTRA_VERSION = 'DEV';
 
+    /** @var string */
     private $charset;
+    /** @var LoaderInterface */
     private $loader;
+    /** @var bool */
     private $debug;
+    /** @var bool */
     private $autoReload;
+    /** @var CacheInterface */
     private $cache;
+    /** @var Lexer */
     private $lexer;
+    /** @var Parser */
     private $parser;
+    /** @var Compiler */
     private $compiler;
     /** @var array<string, mixed> */
     private $globals = [];
+    /** @var array<string, mixed>|null */
     private $resolvedGlobals;
+    /** @var array<string, Template> */
     private $loadedTemplates;
+    /** @var bool */
     private $strictVariables;
+    /** @var CacheInterface|string|false */
     private $originalCache;
+    /** @var ExtensionSet */
     private $extensionSet;
+    /** @var array<RuntimeLoaderInterface> */
     private $runtimeLoaders = [];
+    /** @var array<class-string, object> */
     private $runtimes = [];
+    /** @var string */
     private $optionsHash;
     /** @var bool */
     private $useYield;
+    /** @var FactoryRuntimeLoader */
     private $defaultRuntimeLoader;
+    /** @var array<string, string> */
     private array $hotCache = [];
 
     /**
@@ -860,7 +876,7 @@ class Environment
     /**
      * @internal
      *
-     * @return array<string, array{precedence: int, class: class-string<AbstractUnary>}>
+     * @return array<string, array{precedence: int, class: class-string<AbstractExpression>}>
      */
     public function getUnaryOperators(): array
     {
@@ -870,7 +886,7 @@ class Environment
     /**
      * @internal
      *
-     * @return array<string, array{precedence: int, class: class-string<AbstractBinary>, associativity: ExpressionParser::OPERATOR_*}>
+     * @return array<string, array{precedence: int, class: class-string<AbstractExpression>, associativity: ExpressionParser::OPERATOR_*}>
      */
     public function getBinaryOperators(): array
     {

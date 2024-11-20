@@ -18,7 +18,6 @@ use Twig\Node\EmptyNode;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Expression\ArrayExpression;
 use Twig\Node\Expression\ArrowFunctionExpression;
-use Twig\Node\Expression\Binary\AbstractBinary;
 use Twig\Node\Expression\Binary\ConcatBinary;
 use Twig\Node\Expression\ConditionalExpression;
 use Twig\Node\Expression\ConstantExpression;
@@ -26,7 +25,6 @@ use Twig\Node\Expression\GetAttrExpression;
 use Twig\Node\Expression\MacroReferenceExpression;
 use Twig\Node\Expression\NameExpression;
 use Twig\Node\Expression\TestExpression;
-use Twig\Node\Expression\Unary\AbstractUnary;
 use Twig\Node\Expression\Unary\NegUnary;
 use Twig\Node\Expression\Unary\NotUnary;
 use Twig\Node\Expression\Unary\PosUnary;
@@ -53,9 +51,9 @@ class ExpressionParser
     public const OPERATOR_LEFT = 1;
     public const OPERATOR_RIGHT = 2;
 
-    /** @var array<string, array{precedence: int, precedence_change?: OperatorPrecedenceChange, class: class-string<AbstractUnary>}> */
+    /** @var array<string, array{precedence: int, precedence_change?: OperatorPrecedenceChange, class: class-string<AbstractExpression>}> */
     private $unaryOperators;
-    /** @var array<string, array{precedence: int, precedence_change?: OperatorPrecedenceChange, class: class-string<AbstractBinary>, associativity: self::OPERATOR_*}> */
+    /** @var array<string, array{precedence: int, precedence_change?: OperatorPrecedenceChange, class: class-string<AbstractExpression>, associativity: self::OPERATOR_*}> */
     private $binaryOperators;
     private $readyNodes = [];
     private array $precedenceChanges = [];
