@@ -39,6 +39,7 @@ final class CallableArgumentsExtractor
      */
     public function extractArguments(Node $arguments): array
     {
+        /** @var array<int|string, Node> $extractedArguments */
         $extractedArguments = [];
         $extractedArgumentNameMap = [];
         $named = false;
@@ -80,7 +81,7 @@ final class CallableArgumentsExtractor
         $pos = 0;
         foreach ($callableParameters as $callableParameter) {
             $callableParameterName = $callableParameter->name;
-            if (\PHP_VERSION_ID >= 80000 && 'range' === $callable) {
+            if ('range' === $callable) {
                 if ('start' === $callableParameterName) {
                     $callableParameterName = 'low';
                 } elseif ('end' === $callableParameterName) {

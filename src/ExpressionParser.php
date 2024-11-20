@@ -753,7 +753,6 @@ class ExpressionParser
             $node = new MacroReferenceExpression($alias['node']->getNode('var'), $alias['name'], new ArrayExpression([], $node->getTemplateLine()), $node->getTemplateLine());
         }
 
-        $ready = $test instanceof TwigTest;
         if (!isset($this->readyNodes[$class = $test->getNodeClass()])) {
             $this->readyNodes[$class] = (bool) (new \ReflectionClass($class))->getConstructor()->getAttributes(FirstClassTwigCallableReady::class);
         }

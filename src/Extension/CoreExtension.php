@@ -606,7 +606,7 @@ final class CoreExtension extends AbstractExtension
      * @param int|float             $precision The rounding precision
      * @param string                $method    The method to use for rounding
      *
-     * @return int|float The rounded number
+     * @return float The rounded number
      *
      * @internal
      */
@@ -1223,7 +1223,7 @@ final class CoreExtension extends AbstractExtension
             return mb_strlen($thing, $charset);
         }
 
-        if ($thing instanceof \Countable || \is_array($thing) || $thing instanceof \SimpleXMLElement) {
+        if ($thing instanceof \Countable || \is_array($thing)) {
             return \count($thing);
         }
 

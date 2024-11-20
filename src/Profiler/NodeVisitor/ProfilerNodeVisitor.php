@@ -41,7 +41,7 @@ final class ProfilerNodeVisitor implements NodeVisitorInterface
         return $node;
     }
 
-    public function leaveNode(Node $node, Environment $env): ?Node
+    public function leaveNode(Node $node, Environment $env): Node
     {
         if ($node instanceof ModuleNode) {
             $node->setNode('display_start', new Nodes([new EnterProfileNode($this->extensionName, Profile::TEMPLATE, $node->getTemplateName(), $this->varName), $node->getNode('display_start')]));

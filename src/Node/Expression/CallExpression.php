@@ -173,7 +173,7 @@ abstract class CallExpression extends AbstractExpression
         $pos = 0;
         foreach ($callableParameters as $callableParameter) {
             $name = $this->normalizeName($callableParameter->name);
-            if (\PHP_VERSION_ID >= 80000 && 'range' === $callable) {
+            if ('range' === $callable) {
                 if ('start' === $name) {
                     $name = 'low';
                 } elseif ('end' === $name) {
@@ -327,7 +327,10 @@ abstract class CallExpression extends AbstractExpression
     {
         $current = $this->getAttribute('twig_callable');
 
-        $this->setAttribute('twig_callable', match ($this->getAttribute('type')) {
+        /** @var 'test'|'function'|'filter' $type */
+        $type = $this->getAttribute('type');
+
+        $this->setAttribute('twig_callable', match ($type) {
             'test' => (new TwigTest(
                 $this->getAttribute('name'),
                 $this->hasAttribute('callable') ? $this->getAttribute('callable') : $current->getCallable(),

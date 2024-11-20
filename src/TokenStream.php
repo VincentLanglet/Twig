@@ -42,6 +42,8 @@ final class TokenStream
 
     /**
      * Sets the pointer to the next token and returns the old one.
+     *
+     * @phpstan-impure
      */
     public function next(): Token
     {
@@ -56,6 +58,8 @@ final class TokenStream
      * Tests a token, sets the pointer to the next one and returns it or throws a syntax error.
      *
      * @return Token|null The next token if the condition is true, null otherwise
+     *
+     * @phpstan-impure
      */
     public function nextIf($primary, $secondary = null)
     {
@@ -64,6 +68,8 @@ final class TokenStream
 
     /**
      * Tests a token and returns it or throws a syntax error.
+     *
+     * @phpstan-impure
      */
     public function expect($type, $value = null, ?string $message = null): Token
     {

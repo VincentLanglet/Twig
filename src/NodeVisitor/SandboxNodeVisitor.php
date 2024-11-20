@@ -103,7 +103,7 @@ final class SandboxNodeVisitor implements NodeVisitorInterface
         return $node;
     }
 
-    public function leaveNode(Node $node, Environment $env): ?Node
+    public function leaveNode(Node $node, Environment $env): Node
     {
         if ($node instanceof ModuleNode) {
             $this->inAModule = false;

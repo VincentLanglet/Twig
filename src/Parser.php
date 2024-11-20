@@ -408,7 +408,7 @@ class Parser
         // Node::class !== \get_class($node) should be removed in Twig 4.0
         $nested = $nested || (Node::class !== \get_class($node) && !$node instanceof Nodes);
         foreach ($node as $k => $n) {
-            if (null !== $n && null === $this->filterBodyNodes($n, $nested)) {
+            if (null === $this->filterBodyNodes($n, $nested)) {
                 $node->removeNode($k);
             }
         }

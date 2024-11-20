@@ -63,7 +63,7 @@ final class ReflectionCallable
             $this->name = $class->name.'::'.$r->name;
         } elseif (\PHP_VERSION_ID < 80111 && $class = $r->getClosureScopeClass()) {
             $callable = [\is_array($callable) ? $callable[0] : $class->name, $r->name];
-            $this->name = (\is_array($callable) ? $callable[0] : $class->name).'::'.$r->name;
+            $this->name = $callable[0].'::'.$r->name;
         } else {
             $callable = $this->name = $r->name;
         }

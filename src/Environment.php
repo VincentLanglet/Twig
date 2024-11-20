@@ -139,10 +139,7 @@ class Environment
         $escaperExt = new EscaperExtension($options['autoescape']);
         $escaperExt->setEnvironment($this, false);
         $this->addExtension($escaperExt);
-        if (\PHP_VERSION_ID >= 80000) {
-            $this->addExtension(new YieldNotReadyExtension($this->useYield));
-        }
-        $this->addExtension(new OptimizerExtension($options['optimizations']));
+        $this->addExtension(new YieldNotReadyExtension($this->useYield));
     }
 
     /**
