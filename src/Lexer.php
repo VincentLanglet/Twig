@@ -59,7 +59,7 @@ class Lexer
     public const REGEX_DQ_STRING_DELIM = '/"/A';
     public const REGEX_DQ_STRING_PART = '/[^#"\\\\]*(?:(?:\\\\.|#(?!\{))[^#"\\\\]*)*/As';
     public const REGEX_INLINE_COMMENT = '/#[^\n]*/A';
-    public const PUNCTUATION = '()[]{}?:.,|';
+    public const PUNCTUATION = '()[]{}:,';
 
     private const SPECIAL_CHARS = [
         'f' => "\f",
